@@ -1,5 +1,15 @@
 # Nuclei OpenOCD Distribution
 
+## 2022.12
+
+This is release 2022.12 of openocd.
+
+* nor/spi:add w25q512jv
+* add 'init resethalt' command
+* feature:auto search custom flashloader path
+* fix riscv-debug v0.11 call riscv_run_algorithm error.
+
+
 ## 2022.08
 
 This is release 2022.08 of openocd.
