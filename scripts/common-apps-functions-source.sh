@@ -3,17 +3,17 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the xPack build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the xPack build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
 
-function download_openocd() 
+function download_openocd()
 {
   if [ ! -d "${WORK_FOLDER_PATH}/${OPENOCD_SRC_FOLDER_NAME}" ]
   then
@@ -61,9 +61,9 @@ function do_openocd()
         # --enable-usb_blaster_libftdi -> --enable-usb_blaster
 
         export OUTPUT_DIR="${BUILD_FOLDER_PATH}"
-        
-        export CFLAGS="${XBB_CXXFLAGS} -Wno-pointer-to-int-cast" 
-        export CXXFLAGS="${XBB_CXXFLAGS}" 
+
+        export CFLAGS="${XBB_CXXFLAGS} -Wno-pointer-to-int-cast"
+        export CXXFLAGS="${XBB_CXXFLAGS}"
         export LDFLAGS="${XBB_LDFLAGS_APP}"
 
         AMTJTAGACCEL="--enable-amtjtagaccel"
@@ -87,7 +87,7 @@ function do_openocd()
 
         export CFLAGS="${XBB_CFLAGS} -Wno-format-truncation -Wno-format-overflow"
         export CXXFLAGS="${XBB_CXXFLAGS}"
-        export LDFLAGS="${XBB_LDFLAGS_APP}" 
+        export LDFLAGS="${XBB_LDFLAGS_APP}"
         export LIBS="-lpthread -lrt -ludev"
 
         AMTJTAGACCEL="--enable-amtjtagaccel"
@@ -133,14 +133,14 @@ function do_openocd()
       if [ ! -f "config.status" ]
       then
 
-        # May be required for repetitive builds, because this is an executable built 
+        # May be required for repetitive builds, because this is an executable built
         # in place and using one for a different architecture may not be a good idea.
         rm -rfv "${WORK_FOLDER_PATH}/${OPENOCD_SRC_FOLDER_NAME}/jimtcl/autosetup/jimsh0"
 
         (
           echo
           echo "Running openocd configure..."
-      
+
           bash "${WORK_FOLDER_PATH}/${OPENOCD_SRC_FOLDER_NAME}/configure" --help
 
           bash ${DEBUG} "${WORK_FOLDER_PATH}/${OPENOCD_SRC_FOLDER_NAME}/configure" \
@@ -176,6 +176,7 @@ function do_openocd()
             ${GW18012} \
             --disable-ioutil \
             --enable-jlink \
+            --enable-internal-libjaylink \
             --enable-jtag_vpi \
             --disable-minidriver-dummy \
             --disable-oocd_trace \
@@ -209,14 +210,14 @@ function do_openocd()
       (
         echo
         echo "Running openocd make..."
-      
+
         # Parallel builds fail.
         make bindir="bin" pkgdatadir="" -j32
         if [ "${WITH_STRIP}" == "y" ]
         then
           make install-strip
         else
-          make install  
+          make install
         fi
 
         if [ "${TARGET_PLATFORM}" == "linux" ]
@@ -279,7 +280,7 @@ function do_openocd()
 
           if [ "${WITH_PDF}" == "y" ]
           then
-            make bindir="bin" pkgdatadir="" pdf 
+            make bindir="bin" pkgdatadir="" pdf
             make install-pdf
           fi
 
@@ -310,7 +311,7 @@ function run_openocd()
     if [ ! -z "${wsl_path}" ]
     then
       "${APP_PREFIX}/bin/${APP_EXECUTABLE_NAME}.exe" --version
-    else 
+    else
       (
         xbb_activate
         xbb_activate_installed_bin
