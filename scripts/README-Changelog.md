@@ -1,5 +1,11 @@
 # Nuclei OpenOCD Distribution
 
+## 2023.08
+
+* Add nuclei command group to contains all nuclei customized commands
+* Add nuclei riscv etrace support
+* Add nuclei cpuinfo dump support
+
 ## 2023.06
 
 This is release 2023.06 of openocd.
