@@ -1,19 +1,12 @@
 # Nuclei OpenOCD Distribution
 
-## 2023.08
+## 2023.10
 
 * Add nuclei command group to contains all nuclei customized commands
-* Add nuclei riscv etrace support
 * Add nuclei cpuinfo dump support
-
-## 2023.06
-
-This is release 2023.06 of openocd.
-
 * update nuclei custom csr
 * jtag/drivers: ftdi add nscan1_mode
 * changes are based on [riscv/riscv-openocd](https://github.com/riscv/riscv-openocd/commit/431deec8c9cc3c56e02f6a21610dbd1b4125a96c)
-
 
 ## 2022.12
 
