@@ -3,12 +3,12 @@
 #   (https://xpack.github.io)
 # Copyright (c) 2019 Liviu Ionescu.
 #
-# Permission to use, copy, modify, and/or distribute this software 
+# Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the xPack build 
-# scripts. As the name implies, it should contain only functions and 
+# Helper script used in the second edition of the xPack build
+# scripts. As the name implies, it should contain only functions and
 # should be included with 'source' by the container build scripts.
 
 # -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ function do_libusb1()
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
-      then 
+      then
 
         (
           echo
@@ -73,7 +73,7 @@ function do_libusb1()
             \
             --enable-shared \
             --enable-static
-          
+
           cp "config.log" "${LOGS_FOLDER_PATH}/config-libusb1-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-libusb1-output.txt"
 
@@ -83,9 +83,9 @@ function do_libusb1()
         echo
         echo "Running libusb1 make..."
 
-        # Build. 
+        # Build.
         # WARNING: Parallel build fails!
-        make 
+        make
         if [ "${WITH_STRIP}" == "y" ]
         then
           make install-strip
@@ -108,7 +108,7 @@ function do_libusb0()
   # https://sourceforge.net/projects/libusb/files/libusb-compat-0.1/
 
   # 2013-05-21, 0.1.5, latest
-  
+
   LIBUSB0_SRC_FOLDER_NAME="libusb-compat-${LIBUSB0_VERSION}"
   LIBUSB0_FOLDER_NAME="${LIBUSB0_SRC_FOLDER_NAME}"
   local libusb0_archive="${LIBUSB0_SRC_FOLDER_NAME}.tar.bz2"
@@ -135,7 +135,7 @@ function do_libusb0()
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
-      then 
+      then
 
         (
           echo
@@ -151,8 +151,8 @@ function do_libusb0()
             --target=${TARGET} \
             \
             --enable-shared \
-            --disable-static 
-          
+            --disable-static
+
           cp "config.log" "${LOGS_FOLDER_PATH}/config-libusb0-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-libusb0-output.txt"
 
@@ -184,7 +184,7 @@ function do_libusb0()
 function do_libusb_w32()
 {
   # https://sourceforge.net/projects/libusb-win32/files/libusb-win32-releases/
-  # 2012-01-17, 1.2.6.0 
+  # 2012-01-17, 1.2.6.0
   # LIBUSB_W32_VERSION="1.2.6.0" # +PATCH!
 
   LIBUSB_W32_PREFIX="libusb-win32"
@@ -240,7 +240,7 @@ function do_libusb_w32()
             host_prefix=${CROSS_COMPILE_PREFIX} \
             host_prefix_x86=i686-w64-mingw32 \
             dll
-          
+
       ) 2>&1 | tee "${LOGS_FOLDER_PATH}/make-libusb-w32-output.txt"
 
       # Manually install, could not find a make target.
@@ -310,7 +310,7 @@ function do_libftdi()
       (
         echo
         echo "Running libftdi configure..."
-        
+
         if [ "${TARGET_PLATFORM}" == "win32" ]
         then
 
@@ -401,7 +401,7 @@ function do_libiconv()
       export LDFLAGS="${XBB_LDFLAGS_LIB}"
 
       if [ ! -f "config.status" ]
-      then 
+      then
 
         (
           echo
@@ -447,7 +447,7 @@ function do_libiconv()
   fi
 }
 
-function do_hidapi() 
+function do_hidapi()
 {
   # https://github.com/signal11/hidapi/downloads
 
@@ -539,7 +539,7 @@ function do_hidapi()
           echo "Running hidapi configure..."
 
           bash "./configure" --help
-        
+
           bash ${DEBUG} "./configure" \
             --prefix="${LIBS_INSTALL_FOLDER_PATH}" \
             \
@@ -550,7 +550,7 @@ function do_hidapi()
             --enable-shared \
             --disable-static \
             --disable-testgui
-        
+
           cp "config.log" "${LOGS_FOLDER_PATH}/config-hidapi-log.txt"
         ) 2>&1 | tee "${LOGS_FOLDER_PATH}/configure-hidapi-output.txt"
 
@@ -609,7 +609,7 @@ function do_copy_libudev()
       echo "No libudev.so; abort."
       exit 1
     fi
-  elif [ "${TARGET_ARCH}" == "x32" ] 
+  elif [ "${TARGET_ARCH}" == "x32" ]
   then
     if [ -f "/usr/lib/i386-linux-gnu/libudev.so" ]
     then
@@ -622,7 +622,7 @@ function do_copy_libudev()
       cp "/usr/lib/i386-linux-gnu/pkgconfig/libudev.pc" "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig"
     elif [ -f "/lib/libudev.so.0" ]
     then
-      # In CentOS the location is /lib 
+      # In CentOS the location is /lib
       cp "/lib/libudev.so.0" "${LIBS_INSTALL_FOLDER_PATH}/lib"
       cp "/usr/lib/pkgconfig/libudev.pc" "${LIBS_INSTALL_FOLDER_PATH}/lib/pkgconfig"
     else
@@ -638,7 +638,7 @@ function do_ftd2xx() {
   local ftd2xx_archive="${FTD2XX_SRC_FOLDER_NAME}.zip"
 
   local FTD2XX_VERSION="$1"
-  local ftd2xx_url="https://www.ftdichip.com/Drivers/CDM/CDM%20v${FTD2XX_VERSION}%20WHQL%20Certified.zip"
+  local ftd2xx_url="https://www.ftdichip.com/Driver/CDM/CDM%20v${FTD2XX_VERSION}%20WHQL%20Certified.zip"
 
   local ftd2xx_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-ftd2xx-${FTD2XX_VERSION}-installed"
   if [ ! -f "${ftd2xx_stamp_file_path}" ]
@@ -651,12 +651,12 @@ function do_ftd2xx() {
     echo "A" | download_and_extract "${ftd2xx_url}" "${ftd2xx_archive}" \
       "${FTD2XX_SRC_FOLDER_NAME}"
 
-    # if using --all on a clean build, linux-* is going to be built eariler than win*. 
+    # if using --all on a clean build, linux-* is going to be built eariler than win*.
     # so we need to create the dirs first
     mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x32/install/libs/bin"
     mkdir -p "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x64/install/libs/bin"
 
-    # this function is going to be invoked during a linux-* build; 
+    # this function is going to be invoked during a linux-* build;
     # in any case, just put the files in win* directories
     cp -rv ./i386/*.{dll,lib,sys} "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x32/install/libs/bin"
     cp -rv ./amd64/*.{dll,lib,sys} "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x64/install/libs/bin"
@@ -665,7 +665,7 @@ function do_ftd2xx() {
     mv "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x64/install/libs/bin/ftd2xx64.dll" "${LIBS_INSTALL_FOLDER_PATH}/../../../win32-x64/install/libs/bin/FTD2XX.dll"
 
     # hard code preprocessor
-    # CAVEAT: source code may not be here on the first build; but the first clean build when using `--all` 
+    # CAVEAT: source code may not be here on the first build; but the first clean build when using `--all`
     # is a linux build so it doesn't matter if the sources are patched at that time
     # if you are using --win32 or --win64 in a clean build, this is likely to fail.
     if [ -d "${WORK_FOLDER_PATH}/${OPENOCD_SRC_FOLDER_NAME}"/src/jtag/drivers ]; then
@@ -678,7 +678,7 @@ function do_ftd2xx() {
     touch "${ftd2xx_stamp_file_path}"
 
     ls "${LIBS_INSTALL_FOLDER_PATH}/include/"
-    
+
   else
     echo "Library ftd2xx already installed."
   fi
