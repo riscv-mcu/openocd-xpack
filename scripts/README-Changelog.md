@@ -3,10 +3,14 @@
 ## 2023.10
 
 * Add nuclei command group to contains all nuclei customized commands
-* Add nuclei cpuinfo dump support
-* update nuclei custom csr
-* jtag/drivers: ftdi add nscan1_mode
-* changes are based on [riscv/riscv-openocd](https://github.com/riscv/riscv-openocd/commit/431deec8c9cc3c56e02f6a21610dbd1b4125a96c)
+* Add `nuclei cpuinfo` dump support
+* Add more spiflash devices according to customer request
+* Fix gdb flash program error on address size > 32bit on windows
+* Update nuclei custom csr
+* Add `ftdi nscan1_mode` to support 2-wire cjtag for Nuclei CPU, which is replacement for `ftdi oscan1_mode`
+* Add nuclei custom command in openocd documentation
+* **Experimental and may change**: Add nuclei etrace command to support nuclei etrace hardware feature
+* changes are based on [riscv/riscv-openocd](https://github.com/riscv/riscv-openocd/commit/52177592)
 
 ## 2022.12
 
