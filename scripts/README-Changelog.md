@@ -1,5 +1,12 @@
 # Nuclei OpenOCD Distribution
 
+## 2024.02
+
+* Add nuclei n100 csr support
+* Nuclei etrace support multicore trace
+* OpenOCD doc update
+* changes are based on [riscv/riscv-openocd](https://github.com/riscv/riscv-openocd/commit/52177592)
+
 ## 2023.10
 
 * Add nuclei command group to contains all nuclei customized commands
