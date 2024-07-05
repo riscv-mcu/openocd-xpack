@@ -1,6 +1,13 @@
 # How to build the Nuclei OpenOCD
 
-[![Build Nuclei OpenOCD](https://github.com/riscv-mcu/openocd-xpack/workflows/Build%20Nuclei%20OpenOCD/badge.svg)](https://github.com/riscv-mcu/openocd-xpack/actions)
+>[!NOTE]
+>
+> **Please use this guide to build Nuclei OpenOCD, see https://github.com/riscv-mcu/riscv-openocd/wiki**
+
+
+> [!WARNING]
+> Below content maybe out of date.
+
 
 ## Introduction
 
